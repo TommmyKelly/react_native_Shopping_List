@@ -12,6 +12,8 @@ import {
   TouchableOpacity,
   View,
   Alert,
+  SafeAreaViewBase,
+  SafeAreaView,
 } from "react-native";
 import uuid from "react-native-uuid";
 
@@ -47,7 +49,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.taskWrapper}>
-        <Text style={styles.sectionTitle}>Today's tasks</Text>
+        <View>
+          <Text style={styles.sectionTitle}>Today's tasks</Text>
+        </View>
         <TextInput
           value={inputValue}
           style={styles.input}
@@ -66,18 +70,18 @@ export default function App() {
             />
           </View>
         </TouchableOpacity>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-        />
-        <ScrollView styles={styles.scroll}>
-          <View style={styles.items}>
-            {tasks.map((task) => (
-              <Task key={task.id} task={task} deleteFromList={deleteFromList} />
-            ))}
-          </View>
-        </ScrollView>
+
+        <View style={styles.items}>
+          <FlatList
+            keyExtractor={(item) => item.id}
+            data={tasks}
+            renderItem={({ item }) => (
+              <Task task={item} deleteFromList={deleteFromList} />
+            )}
+          />
+        </View>
       </View>
+
       <StatusBar style='auto' />
     </View>
   );
@@ -85,7 +89,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: "100%",
     backgroundColor: "#E8EAED",
   },
   btn: {
@@ -100,6 +104,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
   taskWrapper: {
+    flex: 1,
     paddingTop: 80,
     paddingHorizontal: 20,
   },
@@ -109,6 +114,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   items: {
+    flex: 1,
     marginTop: 30,
   },
   input: {
@@ -119,5 +125,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  scroll: { display: "none" },
 });

@@ -16,7 +16,6 @@ const Task = ({ task: { id, item }, deleteFromList }) => {
         size={24}
         color='red'
       />
-      {/* <View style={styles.circular}></View> */}
     </View>
   );
 };
