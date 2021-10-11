@@ -2,18 +2,14 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
-  Button,
   FlatList,
   Keyboard,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
   Alert,
-  SafeAreaViewBase,
-  SafeAreaView,
 } from "react-native";
 import uuid from "react-native-uuid";
 
